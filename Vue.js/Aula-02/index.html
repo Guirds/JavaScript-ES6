@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="./vue.js"></script>
+    <title>Vue.js</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ titulo }}</h1>
+      <small>Templetas e diretivas</small>
+
+      <div v-if="comprou">
+        <small>Conteudo não é mostrado no Dom se for false</small>
+        <p>{{ conteudo }}</p>
+        <p>{{ lado * lado - lado / 100 }}</p>
+        <p>{{ comprou ? "Curso Adquirido" : "Adquirir curso" }}</p>
+      </div>
+
+      <div v-show="comprou" :style="{background: cor}">
+        <small>Conteudo ainda é mostrado no Dom se for false</small>
+        <p>{{ conteudo }}</p>
+        <p>{{ lado * lado - lado / 100 }}</p>
+        <p>{{ comprou ? "Curso Adquirido" : "Adquirir curso" }}</p>
+        <input v-model="cor" type="color" />
+      </div>
+
+      <a :href="href"> {{ href }} </a>
+      <a :href="comprou ? href : ''"> {{ href }} </a>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          titulo: "Curso de JavaScript",
+          conteudo: "Vue.js",
+          lado: 5,
+          comprou: true,
+          href: "www.google.com",
+          cor: "#333"
+        }
+      });
+    </script>
+  </body>
+</html>

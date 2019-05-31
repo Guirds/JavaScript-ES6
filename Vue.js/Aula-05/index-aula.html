@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="./vue.js"></script>
+    <title>Vue.js</title>
+  </head>
+  <body>
+    <div id="app">
+      {{ total }}
+      <button @click="incrementar">Incrementar</button>
+      <button @click="diminuir">diminuir</button>
+      <!--@click semprai ser derecionado ao um method por isso não é necessário fazer chamada interna "data.method.incrementar"-->
+      <p>{{ instrumento }}</p>
+      <button @click="mudarNome('Violão')">Violão</button>
+      <button @click="mudarNome('Guitarra')">Guitarra</button>
+    </div>
+    <div id="app1">
+      {{ preco }}
+      {{ alerta }}
+      <button @click="adicionarCupom()">Adicionar</button>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          total: 0,
+          instrumento: ""
+        },
+        methods: {
+          //Sintax Es6
+          incrementar() {
+            this.total++;
+          },
+          diminuir() {
+            this.total--;
+          },
+          mudarNome(instrumento) {
+            this.instrumento = instrumento;
+          }
+        }
+      });
+
+      //Method chamando method
+      const vm1 = new Vue({
+        el: "#app1",
+        data: {
+          preco: 149,
+          alerta: ""
+        },
+        methods: {
+          adicionarCupom() {
+            this.preco *= 0.9;
+            this.alertaCupom();
+          },
+          alertaCupom() {
+            this.alerta = "Cupom Adicionado";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

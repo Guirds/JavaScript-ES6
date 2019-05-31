@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="./vue.js"></script>
+    <title>Vue.js</title>
+  </head>
+  <body>
+    <div id="app">
+      <a v-bind:href="link">Google</a>
+      <p v-bind:clas="cor" class="ativos">Texto</p>
+      <!--Atalho v-bind-->
+      <a :href="link">Google</a>
+      <p :clas="cor" class="ativos">Texto</p>
+      <p :class="comprou ? liberar : naoLiberar' ">O cliente comprou?</p>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          link: "www.google.com",
+          cor: "vermelho",
+          liberar: "verde",
+          naoLiberar: "vermelho",
+          comprou: true // ou 1
+          // comprou: false  ou 0 ou '' ou null
+        }
+      });
+    </script>
+  </body>
+</html>

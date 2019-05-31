@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="./vue.js"></script>
+    <title>Vue.js</title>
+  </head>
+  <body>
+    <div id="app">
+
+      <div :class="apple.marketCap > google.marketCap ? 'verde' : 'vermelho'">
+      <p>Nome da Empresa: {{ apple.companyName }}
+        <p> valor da apple: {{ apple.marketCap }} </p>
+      </p>
+    </div>
+    <div :class="google.marketCap > apple.marketCap  ? 'verde' : 'vermelho'">
+      <p>Nome da Empresa: {{ google.companyName }}
+        <p>valor da google: {{ google.marketCap }}</p>
+      </p>
+    </div>
+      <button @click="puxarDados">Apple</button>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          google: {},
+          apple: {}
+        },
+        methods: {
+          AcoesApple() {
+            fetch("https://api.iextrading.com/1.0/stock/aapl/quote")
+              .then(response => response.json())
+              .then(json => {
+                this.apple = json;
+              });
+          },
+          AcoesGoogle() {
+            fetch("https://api.iextrading.com/1.0/stock/googl/quote")
+              .then(response => response.json())
+              .then(json => {
+                this.google = json;
+              });
+          },
+          puxarDados() {
+            this.AcoesApple();
+            this.AcoesGoogle();
+          }
+        }
+      });
+    </script>
+        <style>
+            .verde{
+              color: green;
+            }
+            .vermelho{
+              color:red
+            }
+          </style>
+        <!--
+      Utilizando as API's
+      https://api.iextrading.com/1.0/stock/aapl/quote
+      https://api.iextrading.com/1.0/stock/googl/quote
+
+      - Compare o marketCap (valor de mercado) entre ambas.
+
+      - Mostre o nome das empresas e o valor
+      na interface (companyName e marketCap).
+
+      - Mude a cor para verde o nome da empresa com maior marketCap e vermelho a com menor.
+    -->
+  </body>
+</html>

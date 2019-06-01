@@ -8,12 +8,89 @@
     <title>Vue.js</title>
   </head>
   <body>
-    <ul>
-      <li><a href="https://api.iextrading.com/1.0/stock/aapl/quote"></a></li>
-      <li><a href="https://api.iextrading.com/1.0/stock/googl/quote"></a></li>
-      <li><a href="https://api.iextrading.com/1.0/stock/amz/quote"></a></li>
-      <li><a href="https://api.iextrading.com/1.0/stock/paypl/quote"></a></li>
+    <ul id="app">
+      <li>
+        <a
+          @click.prevent=""
+          href="https://api.iextrading.com/1.0/stock/aapl/quote"
+          >Nome: {{ apple.companyName }} PrecoAcoes:
+          {{ apple.latestPrice }} Preco: {{ apple.marketCap }}</a
+        >
+      </li>
+      <li>
+        <a
+          @click.prevent=""
+          href="https://api.iextrading.com/1.0/stock/googl/quote"
+          >Nome: {{ google.companyName }} PrecoAcoes:
+          {{ google.latestPrice }} Preco: {{ google.marketCap }}</a
+        >
+      </li>
+      <li>
+        <a
+          @click.prevent=""
+          href="https://api.iextrading.com/1.0/stock/amz/quote"
+          >{{ amazon.companyName }} {{ amazon.latestPrice }}
+          {{ amazon.marketCap }}</a
+        >
+      </li>
+      <li>
+        <a
+          @click.prevent=""
+          href="https://api.iextrading.com/1.0/stock/paypl/quote"
+          >{{ paypal.companyName }} {{ paypal.latestPrice }}
+          {{ paypal.marketap }}</a
+        >
+      </li>
+      <button @click="puxarDados">Dados</button>
     </ul>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          apple: {},
+          google: {},
+          amazon: {},
+          paypal: {}
+        },
+        methods: {
+          addApple() {
+            fetch("https://api.iextrading.com/1.0/stock/aapl/quote")
+              .then(r => r.json())
+              .then(json => {
+                this.apple = json;
+              });
+          },
+          addGoogle() {
+            fetch("https://api.iextrading.com/1.0/stock/googl/quote")
+              .then(r => r.json())
+              .then(json => {
+                this.google = json;
+              });
+          },
+          addAmazon() {
+            fetch("https://api.iextrading.com/1.0/stock/amz/quote")
+              .then(r => r.json())
+              .then(json => {
+                this.amazon = json;
+              });
+          },
+          addPaypal() {
+            fetch("https://api.iextrading.com/1.0/stock/paypl/quote")
+              .then(r => r.json())
+              .then(json => {
+                this.paypal = json;
+              });
+          },
+          puxarDados() {
+            this.addAmazon();
+            this.addApple();
+            this.addGoogle();
+            this.addPaypal();
+          }
+        }
+      });
+    </script>
     <!--
       Utilizando as API's
       https://api.iextrading.com/1.0/stock/aapl/quote

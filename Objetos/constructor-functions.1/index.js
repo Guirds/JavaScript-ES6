@@ -32,8 +32,6 @@ lastLi.ativo('ativo')
 // Desafios
 // Transforme o objeto abaixo em uma  Constructor Function
 function Pessoa (nome, idade) {
-  this.nome = nome
-  this.idade = idade
   this.andar = function (nome) {
     console.log(nome + 'andou')
   }

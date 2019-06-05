@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="./vue.js"></script>
+    <title>Vue.js</title>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="contador++ ">clique Aqui</button>
+      {{ contador }}
+      <button @click="ativo = !ativo">toggle</button>
+      <a href="#interno" @click.prent="handleClick">Previne evento do html</a>
+      <p v-if="ativo">Mostrar texto</p>
+      {{ ativo }}
+      <input type="text" @keyup.enter="handleClick" />
+      <!--Para ter acesso aos comando do entrada do teclado, basta usar o @keyup.(tecla) e pro o evento.key, (pesquisar mais sobre as propriedades do Key)-->
+      <p @mousemove="handleMove">Esse é o mouse x: {{ mouse.x }}</p>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          contador: 0,
+          ativo: false,
+          mouse: ""
+        },
+        methods: {
+          handleClick(event) {
+            console.log(event.key);
+          },
+          handleMove(event) {
+            this.mouse = event;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
